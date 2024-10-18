@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng và Thanh toán</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #010b16;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        header .logo, header .account, header .cart {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        header .cart {
+            background-color: #28a745;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+
+        main {
+            display: flex;
+            padding: 20px;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .cart-section, .checkout-section {
+            width: 48%;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: auto; /* Added to prevent content overflow */
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #010a13;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Cart styles */
+        .cart-items {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            max-height: 300px; /* Set a max height */
+            overflow-y: auto; /* Allow scrolling if content exceeds max height */
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #010b16;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Add margin top for better spacing */
+
+        }
+
+        button:hover {
+            background-color: #000810;
+        }
+
+        button.remove {
+            background-color: #dc3545;
+        }
+
+        button.remove:hover {
+            background-color: #c82333;
+        }
+
+        .update-cart {
+            background-color: #28a745;
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 16px;
+            width: 100%; /* Make the button full width */
+        }
+
+        .checkout-info {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .checkout-info p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+            text-align: right;
+        }
+
+        .checkout {
+            width: 100%;
+            background-color: #ff5722;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 10px; /* Added margin for spacing */
+        }
+
+        .checkout:hover {
+            background-color: #e64a19;
+        }
+
+        /* New styles for address section */
+        .address-section {
+            margin-bottom: 20px;
+        }
+
+        .edit-address {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px; /* Add margin for spacing */
+        }
+
+        .edit-address button {
+            margin-left: 10px;
+            background-color: #ffc107;
+        }
+
+        .new-address {
+            margin-top: 15px;
+        }
+
+        .new-address button {
+            background-color: #28a745;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="logo" onclick="window.location.href='test1.html'" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer;">TRANG CHỦ</button>
+        <div class="account">TÀI KHOẢN</div>
+        <div class="cart">Giỏ hàng (2)</div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Giỏ hàng -->
+        <section class="cart-section">
+            <h2>Giỏ hàng</h2>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/n/o/noi-chien-khong-dau-philips-na130-30_5_.png" alt="Sản phẩm 1">
+                    <div class="item-info">
+                        <h4>Nồi chiên không dầu Philips</h4>
+                        <p>Giá: 2.099.000 VNĐ</p>
+                        <label for="quantity1">Số lượng:</label>
+                        <input type="number" id="quantity1" value="1">
+                        <p>Tổng tiền: 2.099.000 VNĐ</p>
+                        <button class="remove">Xóa</button>
+                    </div>
+                </div>
+                <div class="cart-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/n/o/noi-com-dien-final_4__5.png" alt="Sản phẩm 2">
+                    <div class="item-info">
+                        <h4>Nồi cơm điện Final</h4>
+                        <p>Giá: 12.000.000 VNĐ</p>
+                        <label for="quantity2">Số lượng:</label>
+                        <input type="number" id="quantity2" value="1">
+                        <p>Tổng tiền: 12.000.000 VNĐ</p>
+                        <button class="remove">Xóa</button>
+                    </div>
+                </div>
+            </div>
+            <button class="update-cart">Cập nhật giỏ hàng</button>
+        </section>
+
+        <!-- Thanh toán -->
+        <section class="checkout-section">
+            <h2>Thông tin thanh toán</h2>
+            <div class="checkout-info">
+                <div class="address-section">
+                    <h3>Địa chỉ giao hàng:</h3>
+                    <span>123 Đường ABC, TP.HN</span>
+                    <div class="edit-address">
+                        <button class="edit-address-btn">Chỉnh sửa</button>
+                    </div>
+                    <div class="new-address">
+                        <label for="new-address">Thêm địa chỉ mới:</label>
+                        <input type="text" id="new-address" placeholder="Nhập địa chỉ...">
+                        <button>Lưu</button>
+                    </div>
+                </div>
+                
+                <label for="payment-method">Phương thức thanh toán:</label>
+                <select id="payment-method">
+                    <option>Thẻ tín dụng</option>
+                    <option>Chuyển khoản</option>
+                    <option>Ví điện tử</option>
+                    <option>Thanh toán khi nhận hàng</option>
+                </select>
+
+                <label for="discount">Mã giảm giá:</label>
+                <input type="text" id="discount" placeholder="Nhập mã...">
+
+                <p>Tổng tiền thanh toán: 14.090.000 VNĐ</p>
+                <button class="checkout">Thanh toán ngay</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Bản quyền thuộc về Website Bán Hàng . Nhóm 12 . Lớp 23IT4</p>
+    </footer>
+
+</body>
+</html>
